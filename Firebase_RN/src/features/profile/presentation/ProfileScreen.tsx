@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  TextInput,
-  Image,
-  Alert,
-  Button,
-} from "react-native";
-import { launchImageLibrary } from "react-native-image-picker";
+import { View, Text, TextInput, Alert, Pressable } from "react-native";
 
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { updateProfileThunk } from "../state/profileSlice";
+import { updateProfileThunk, clearProfileError } from "../state/profileSlice";
 import { logoutThunk } from "@/features/auth/state/authThunks";
-import { clearProfileError } from "../state/profileSlice";
 import styles from "./styles";
 
 const ProfileScreen: React.FC = () => {
@@ -22,7 +14,6 @@ const ProfileScreen: React.FC = () => {
 
   const [name, setName] = useState(user?.name ?? "");
   const [phone, setPhone] = useState(user?.phone ?? "");
-  const [imageUri, setImageUri] = useState<string | undefined>();
 
   /* Show profile error */
   useEffect(() => {
@@ -32,17 +23,6 @@ const ProfileScreen: React.FC = () => {
       { text: "OK", onPress: () => dispatch(clearProfileError()) },
     ]);
   }, [error, dispatch]);
-
-  const pickImage = async () => {
-    const res = await launchImageLibrary({
-      mediaType: "photo",
-      selectionLimit: 1,
-    });
-
-    if (res.assets?.[0]?.uri) {
-      setImageUri(res.assets[0].uri);
-    }
-  };
 
   const onSave = () => {
     if (!user) return;
@@ -56,16 +36,17 @@ const ProfileScreen: React.FC = () => {
         uid: user.uid,
         name: name.trim(),
         phone: phone.trim(),
-        imageUri,
       })
     );
+
+    Alert.alert("Success", "Profile updated");
   };
 
   const onLogout = () => {
     Alert.alert("Logout", "Are you sure?", [
       { text: "Cancel", style: "cancel" },
       {
-        text: "Yes",
+        text: "Logout",
         style: "destructive",
         onPress: () => dispatch(logoutThunk()),
       },
@@ -74,15 +55,16 @@ const ProfileScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Image
-        source={{
-          uri: imageUri ?? user?.photoURL ?? undefined,
-        }}
-        style={styles.avatar}
+      <Text style={styles.title}>Personal Details</Text>
+
+      <Text style={styles.label}>Email</Text>
+      <TextInput
+        value={user?.email}
+        editable={false}
+        style={[styles.input, styles.disabledInput]}
       />
 
-      <Button title="Change Photo" onPress={pickImage} />
-
+      <Text style={styles.label}>Name</Text>
       <TextInput
         value={name}
         onChangeText={setName}
@@ -90,6 +72,7 @@ const ProfileScreen: React.FC = () => {
         style={styles.input}
       />
 
+      <Text style={styles.label}>Mobile</Text>
       <TextInput
         value={phone}
         onChangeText={setPhone}
@@ -98,13 +81,19 @@ const ProfileScreen: React.FC = () => {
         style={styles.input}
       />
 
-      <Button
-        title={loading ? "Saving..." : "Save"}
+      <Pressable
         onPress={onSave}
         disabled={loading}
-      />
+        style={[styles.button, loading && styles.disabledButton]}
+      >
+        <Text style={styles.buttonText}>
+          {loading ? "Saving..." : "Save"}
+        </Text>
+      </Pressable>
 
-      <Button title="Logout" color="red" onPress={onLogout} />
+      <Pressable onPress={onLogout} style={styles.logoutButton}>
+        <Text style={styles.logoutText}>Logout</Text>
+      </Pressable>
     </View>
   );
 };

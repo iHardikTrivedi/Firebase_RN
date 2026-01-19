@@ -9,7 +9,6 @@ export interface User {
   email: string;
   name?: string;
   phone?: string;
-  photoURL?: string;
 }
 
 /**
@@ -26,5 +25,4 @@ export interface UpdateProfileRequest {
   uid: string;
   name: string;
   phone: string;
-  imageUri?: string;
 }

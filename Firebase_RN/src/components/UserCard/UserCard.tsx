@@ -13,9 +13,7 @@ const UserCard: React.FC<Props> = ({ user }) => {
     <View style={styles.container}>
       <Image
         source={
-          user.photoURL
-            ? { uri: user.photoURL }
-            : User
+          User
         }
         style={styles.avatar}
       />

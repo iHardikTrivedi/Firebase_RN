@@ -1,5 +1,11 @@
-export const EXPO_PUBLIC_FIREBASE_API_KEY = 'xxxx';
-export const EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN = 'xxxx';
-export const EXPO_PUBLIC_FIREBASE_DATABASE_URL = 'xxxx';
-export const EXPO_PUBLIC_FIREBASE_PROJECT_ID = 'xxxx';
-export const EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET = 'xxxx';
+export const EXPO_PUBLIC_FIREBASE_API_KEY = process.env
+  .EXPO_PUBLIC_FIREBASE_API_KEY as string;
+
+export const EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN = process.env
+  .EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN as string;
+
+export const EXPO_PUBLIC_FIREBASE_DATABASE_URL = process.env
+  .EXPO_PUBLIC_FIREBASE_DATABASE_URL as string;
+
+export const EXPO_PUBLIC_FIREBASE_PROJECT_ID = process.env
+  .EXPO_PUBLIC_FIREBASE_PROJECT_ID as string;

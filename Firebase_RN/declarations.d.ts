@@ -17,3 +17,9 @@ declare module '*.svg' {
   const value: any;
   export default value;
 }
+
+declare const process: {
+  env: {
+    [key: string]: string | undefined;
+  };
+};

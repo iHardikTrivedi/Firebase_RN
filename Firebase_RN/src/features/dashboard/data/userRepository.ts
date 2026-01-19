@@ -1,25 +1,16 @@
 import { get, ref } from 'firebase/database';
-import { db } from '@/services/firebase';
-import type { DashboardUser } from '@/types/user';
+import { db } from '../../../services/firebase';
 
-/**
- * Fetch all users except the currently logged-in user
- */
-export const fetchUsers = async (
-  currentUid: string,
-): Promise<DashboardUser[]> => {
+export const fetchUsers = async (currentUid: string) => {
   const snapshot = await get(ref(db, 'users'));
+  if (!snapshot.exists()) return [];
 
-  if (!snapshot.exists()) {
-    return [];
-  }
-
-  const users = snapshot.val() as Record<string, Omit<DashboardUser, 'uid'>>;
-
-  return Object.keys(users)
-    .filter(uid => uid !== currentUid)
-    .map(uid => ({
+  return Object.entries(snapshot.val())
+    .filter(([uid]) => uid !== currentUid)
+    .map(([uid, user]: any) => ({
       uid,
-      ...users[uid],
+      email: user.email,
+      name: user.name ?? '',
+      phone: user.phone ?? '',
     }));
 };
