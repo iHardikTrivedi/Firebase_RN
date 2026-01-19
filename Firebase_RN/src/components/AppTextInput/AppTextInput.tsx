@@ -13,6 +13,7 @@ type Props = {
   placeholder: string;
   placeholderTextColor?: string;
   secureTextEntry?: boolean;
+  showHideShow?: boolean;
   onRightIconPress?: () => void;
   autoCapitalize?: AutoCapitalize;
   keyboardType?: AppKeyboardType;
@@ -26,6 +27,7 @@ const AppTextInput: React.FC<Props> = ({
   placeholder,
   placeholderTextColor = "#9A9A9A",
   secureTextEntry = false,
+  showHideShow = false,
   onRightIconPress,
   autoCapitalize = AutoCapitalize.None,
   keyboardType = AppKeyboardType.Default,
@@ -48,12 +50,12 @@ const AppTextInput: React.FC<Props> = ({
         onSubmitEditing={onSubmitEditing}
       />
 
-      {secureTextEntry && (
+      {showHideShow && (
         <Pressable
           onPress={onRightIconPress}
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
-          {secureTextEntry ? <Text>Hide</Text> : <Text>Show</Text>}
+          {secureTextEntry ? <Text>Show</Text> : <Text>Hide</Text>}
         </Pressable>
       )}
     </View>

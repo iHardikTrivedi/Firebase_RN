@@ -2,16 +2,6 @@ import { StyleSheet } from 'react-native';
 import { FontFamily, FontSize } from '@/constants/fonts';
 
 const styles = StyleSheet.create({
-  safe: {
-    flex: 1,
-    backgroundColor: '#FFFFFF',
-  },
-  container: {
-    flex: 1,
-    paddingHorizontal: 28,
-    backgroundColor: '#FFFFFF',
-  },
-
   title: {
     fontSize: FontSize.XL,
     fontFamily: FontFamily.SEMI_BOLD,

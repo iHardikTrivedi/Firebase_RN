@@ -15,6 +15,7 @@ import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { signupThunk } from "@/features/auth/state/authThunks";
 import { clearAuthError } from "@/features/auth/state/authSlice";
 import { checkInternet } from "@/utils/checkInternet";
+import globalStyles from "@/styles/globalStyles";
 
 type Props = NativeStackScreenProps<
   AuthStackParamList,
@@ -88,8 +89,8 @@ const SignUpScreen: React.FC<Props> = ({ navigation }) => {
   }, [navigation]);
 
   return (
-    <SafeAreaView style={styles.safe}>
-      <View style={styles.container}>
+    <SafeAreaView style={globalStyles.safeArea}>
+      <View style={globalStyles.screen}>
         <Text style={styles.title}>
           Create{"\n"}Account!
         </Text>
@@ -106,6 +107,7 @@ const SignUpScreen: React.FC<Props> = ({ navigation }) => {
           onChangeText={setPassword}
           placeholder="Password"
           secureTextEntry={!isPasswordVisible}
+          showHideShow={true}
           onRightIconPress={() =>
             setIsPasswordVisible((v) => !v)
           }
@@ -117,6 +119,7 @@ const SignUpScreen: React.FC<Props> = ({ navigation }) => {
           onChangeText={setConfirmPassword}
           placeholder="Confirm Password"
           secureTextEntry={!isConfirmPasswordVisible}
+          showHideShow={true}
           onRightIconPress={() =>
             setIsConfirmPasswordVisible((v) => !v)
           }

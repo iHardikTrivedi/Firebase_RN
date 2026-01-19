@@ -1,14 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
 import { fetchUsers } from '../data/userRepository';
 import type { DashboardUser } from '@/types/user';
 
-/**
- * Fetch users except the currently logged-in user
- */
 export const fetchUsersThunk = createAsyncThunk<
-  DashboardUser[], // return type
-  string, // payload (current user uid)
+  DashboardUser[],
+  string,
   { rejectValue: string }
 >('dashboard/fetchUsers', async (uid, { rejectWithValue }) => {
   try {
@@ -38,15 +34,14 @@ const dashboardSlice = createSlice({
     builder
       .addCase(fetchUsersThunk.pending, state => {
         state.loading = true;
-        state.error = null;
       })
       .addCase(fetchUsersThunk.fulfilled, (state, action) => {
-        state.users = action.payload;
         state.loading = false;
+        state.users = action.payload;
       })
       .addCase(fetchUsersThunk.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload ?? 'Unable to load users';
+        state.error = action.payload ?? 'Permission denied';
       });
   },
 });

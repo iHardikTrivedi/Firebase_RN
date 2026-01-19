@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, Alert, Pressable } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { updateProfileThunk, clearProfileError } from "../state/profileSlice";
 import { logoutThunk } from "@/features/auth/state/authThunks";
 import styles from "./styles";
+import globalStyles from "@/styles/globalStyles";
 
 const ProfileScreen: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -54,47 +56,49 @@ const ProfileScreen: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Personal Details</Text>
+    <SafeAreaView style={globalStyles.safeArea}>
+      <View style={globalStyles.screen}>
+        <Text style={styles.title}>Personal Details</Text>
 
-      <Text style={styles.label}>Email</Text>
-      <TextInput
-        value={user?.email}
-        editable={false}
-        style={[styles.input, styles.disabledInput]}
-      />
+        <Text style={styles.label}>Email</Text>
+        <TextInput
+          value={user?.email}
+          editable={false}
+          style={[styles.input, styles.disabledInput]}
+        />
 
-      <Text style={styles.label}>Name</Text>
-      <TextInput
-        value={name}
-        onChangeText={setName}
-        placeholder="Name"
-        style={styles.input}
-      />
+        <Text style={styles.label}>Name</Text>
+        <TextInput
+          value={name}
+          onChangeText={setName}
+          placeholder="Name"
+          style={styles.input}
+        />
 
-      <Text style={styles.label}>Mobile</Text>
-      <TextInput
-        value={phone}
-        onChangeText={setPhone}
-        placeholder="Phone"
-        keyboardType="phone-pad"
-        style={styles.input}
-      />
+        <Text style={styles.label}>Mobile</Text>
+        <TextInput
+          value={phone}
+          onChangeText={setPhone}
+          placeholder="Phone"
+          keyboardType="phone-pad"
+          style={styles.input}
+        />
 
-      <Pressable
-        onPress={onSave}
-        disabled={loading}
-        style={[styles.button, loading && styles.disabledButton]}
-      >
-        <Text style={styles.buttonText}>
-          {loading ? "Saving..." : "Save"}
-        </Text>
-      </Pressable>
+        <Pressable
+          onPress={onSave}
+          disabled={loading}
+          style={[styles.button, loading && styles.disabledButton]}
+        >
+          <Text style={styles.buttonText}>
+            {loading ? "Saving..." : "Save"}
+          </Text>
+        </Pressable>
 
-      <Pressable onPress={onLogout} style={styles.logoutButton}>
-        <Text style={styles.logoutText}>Logout</Text>
-      </Pressable>
-    </View>
+        <Pressable onPress={onLogout} style={styles.logoutButton}>
+          <Text style={styles.logoutText}>Logout</Text>
+        </Pressable>
+      </View>
+    </SafeAreaView>
   );
 };
 

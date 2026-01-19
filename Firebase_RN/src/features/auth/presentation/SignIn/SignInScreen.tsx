@@ -16,6 +16,7 @@ import { withKeyboardDismiss } from "@/utils/withKeyboardDismiss";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { loginThunk } from "@/features/auth/state/authThunks";
 import { clearAuthError } from "@/features/auth/state/authSlice";
+import globalStyles from "@/styles/globalStyles";
 
 type Props = NativeStackScreenProps<
   AuthStackParamList,
@@ -73,8 +74,8 @@ const SignInScreen: React.FC<Props> = ({ navigation }) => {
   }, [navigation]);
 
   return (
-    <SafeAreaView style={styles.safe}>
-      <View style={styles.container}>
+    <SafeAreaView style={globalStyles.safeArea}>
+      <View style={globalStyles.screen}>
         <Text style={styles.title}>
           Welcome{"\n"}Back!
         </Text>
@@ -91,6 +92,7 @@ const SignInScreen: React.FC<Props> = ({ navigation }) => {
           onChangeText={setPassword}
           placeholder="Password"
           secureTextEntry={!isPasswordVisible}
+          showHideShow={true}
           onRightIconPress={() =>
             setIsPasswordVisible((v) => !v)
           }
