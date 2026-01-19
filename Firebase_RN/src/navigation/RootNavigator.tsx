@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { setUser, clearUser } from "@/features/auth/state/authSlice";
 
 import AuthNavigator from "@/features/auth/presentation/AuthNavigator";
-import MainTabs from "@/navigation/Tabs";
+import MainTabs from "@/navigation/Tabs/Tabs";
 
 const RootNavigator: React.FC = () => {
   const dispatch = useAppDispatch();

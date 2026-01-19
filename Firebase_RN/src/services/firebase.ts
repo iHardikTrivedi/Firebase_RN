@@ -1,6 +1,7 @@
 import { initializeApp, getApps, getApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
+import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
 import { getDatabase } from 'firebase/database';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {
   EXPO_PUBLIC_FIREBASE_API_KEY,
@@ -20,7 +21,13 @@ const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
 /**
  * ✅ React Native Firebase Auth
- * Persistence works automatically on native
+ * Explicit AsyncStorage persistence (REQUIRED)
  */
-export const auth = getAuth(app);
+export const auth = initializeAuth(app, {
+  persistence: getReactNativePersistence(AsyncStorage),
+});
+
+/**
+ * Realtime Database
+ */
 export const db = getDatabase(app);
