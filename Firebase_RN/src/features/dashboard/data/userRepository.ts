@@ -1,6 +1,7 @@
 import { get, ref } from 'firebase/database';
 import { db } from '@/services/firebase';
 import type { DashboardUser } from '@/types/user';
+import { mapFirebaseDbError } from '@/utils/firebaseError';
 
 export const fetchUsers = async (
   currentUid: string,
@@ -11,19 +12,17 @@ export const fetchUsers = async (
     if (!snapshot.exists()) {
       return [];
     }
-
     const data = snapshot.val();
 
-    return Object.keys(data)
-      .filter(uid => uid !== currentUid) // 🔥 exclude self
-      .map(uid => ({
+    return Object.entries(data)
+      .filter(([uid]) => uid !== currentUid) // exclude self
+      .map(([uid, user]: any) => ({
         uid,
-        email: data[uid].email ?? '',
-        name: data[uid].name ?? '',
-        phone: data[uid].phone ?? '',
+        email: user?.email ?? '',
+        name: user?.name ?? '',
+        phone: user?.phone ?? '',
       }));
   } catch (error) {
-    console.error('fetchUsers error:', error);
-    throw error;
+    throw new Error(mapFirebaseDbError(error));
   }
 };

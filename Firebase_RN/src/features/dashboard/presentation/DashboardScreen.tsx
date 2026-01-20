@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from "react";
-import { FlatList, View, Text } from "react-native";
+import { FlatList, View, Text, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
@@ -12,12 +12,11 @@ const DashboardScreen: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const uid = useAppSelector(state => state.auth.user?.uid);
-  const { users, loading } = useAppSelector(state => state.dashboard);
+  const { users, loading, error } = useAppSelector(state => state.dashboard);
 
   const loadUsers = useCallback(() => {
-    if (uid) {
-      dispatch(fetchUsersThunk(uid));
-    }
+    if (!uid) return;
+    dispatch(fetchUsersThunk(uid));
   }, [uid, dispatch]);
 
   useEffect(() => {
@@ -29,23 +28,31 @@ const DashboardScreen: React.FC = () => {
       <View style={globalStyles.screen}>
         <Text style={styles.title}>List of Users</Text>
 
-        <FlatList
-          data={users}
-          keyExtractor={item => item.uid}
-          renderItem={({ item }) => <UserCard user={item} />}
-          refreshing={loading}
-          onRefresh={loadUsers}
-          ListEmptyComponent={
-            !loading ? (
-              <Text style={styles.emptyText}>
-                No users found
-              </Text>
-            ) : null
-          }
-          contentContainerStyle={
-            users.length === 0 ? styles.emptyContainer : undefined
-          }
-        />
+        {/* Error State */}
+        {error && !loading && (
+          <Text style={styles.errorText}>{error}</Text>
+        )}
+
+        {/* Loading State (first load) */}
+        {loading && users.length === 0 ? (
+          <ActivityIndicator size="large" />
+        ) : (
+          <FlatList
+            data={users}
+            keyExtractor={item => item.uid}
+            renderItem={({ item }) => <UserCard user={item} />}
+            refreshing={loading}
+            onRefresh={loadUsers}
+            ListEmptyComponent={
+              !loading ? (
+                <Text style={styles.emptyText}>No users found</Text>
+              ) : null
+            }
+            contentContainerStyle={
+              users.length === 0 ? styles.emptyContainer : undefined
+            }
+          />
+        )}
       </View>
     </SafeAreaView>
   );
