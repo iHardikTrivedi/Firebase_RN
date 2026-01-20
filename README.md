@@ -8,7 +8,7 @@ Supports **Android & iOS** with a clean, production-ready architecture.
 ---
 
 ## SCAN for Android Device
-![My_QR_Code_1-1024](https://github.com/user-attachments/assets/87503090-dca2-4605-8b10-c1229bd0110a)
+![My_QR_Code_1-1024](https://github.com/user-attachments/assets/8dde741c-9381-4878-9079-a1fb867d4a3c)
 
 ---
 
