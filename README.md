@@ -99,6 +99,10 @@ Firebase error codes are never shown to end users.
 - Logged-in user is excluded from dashboard list
 - Pull-to-refresh reloads user list
 - Empty, loading, and error states are handled correctly
+ 
+---
+## Code Coverage wiht Jest Unit testing
+<img width="1881" height="1162" alt="Screenshot 2026-01-21 at 12 26 40" src="https://github.com/user-attachments/assets/0a5ffdb4-52e2-4bf0-851a-e5f109ea76ec" />
   
 ---
 
