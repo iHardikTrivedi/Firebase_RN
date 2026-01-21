@@ -1,5 +1,10 @@
 import React, { useEffect, useCallback } from "react";
-import { FlatList, View, Text, ActivityIndicator } from "react-native";
+import {
+  FlatList,
+  View,
+  Text,
+  ActivityIndicator,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
@@ -12,7 +17,9 @@ const DashboardScreen: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const uid = useAppSelector(state => state.auth.user?.uid);
-  const { users, loading, error } = useAppSelector(state => state.dashboard);
+  const { users, loading, error } = useAppSelector(
+    state => state.dashboard
+  );
 
   const loadUsers = useCallback(() => {
     if (!uid) return;
@@ -35,21 +42,30 @@ const DashboardScreen: React.FC = () => {
 
         {/* Loading State (first load) */}
         {loading && users.length === 0 ? (
-          <ActivityIndicator size="large" />
+          <ActivityIndicator
+            size="large"
+            testID="ActivityIndicator"
+          />
         ) : (
           <FlatList
             data={users}
             keyExtractor={item => item.uid}
-            renderItem={({ item }) => <UserCard user={item} />}
+            renderItem={({ item }) => (
+              <UserCard user={item} />
+            )}
             refreshing={loading}
             onRefresh={loadUsers}
             ListEmptyComponent={
               !loading ? (
-                <Text style={styles.emptyText}>No users found</Text>
+                <Text style={styles.emptyText}>
+                  No users found
+                </Text>
               ) : null
             }
             contentContainerStyle={
-              users.length === 0 ? styles.emptyContainer : undefined
+              users.length === 0
+                ? styles.emptyContainer
+                : undefined
             }
           />
         )}
