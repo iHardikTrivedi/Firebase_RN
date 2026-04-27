@@ -1,14 +1,9 @@
 # 📱 Firebase_RN
 
-A **React Native mobile application** using **Firebase Authentication** and **Firebase Realtime Database**, built with **TypeScript** and **Redux Toolkit**.  
+A **React Native mobile application** using **Firebase Authentication** and **Firebase Realtime Database**, built with **TypeScript** and **Redux Toolkit**.
 Supports **Android & iOS** with a clean, production-ready architecture.
 
 🔗 **Repository:** https://github.com/iHardikTrivedi/Firebase_RN
-
----
-
-## SCAN for Android Device
-![My_QR_Code_1-1024](https://github.com/user-attachments/assets/8dde741c-9381-4878-9079-a1fb867d4a3c)
 
 ---
 
@@ -38,6 +33,7 @@ Supports **Android & iOS** with a clean, production-ready architecture.
 ---
 
 ## 📂 Project Structure
+
 <img width="987" height="886" alt="Screenshot 2026-01-20 at 13 13 52" src="https://github.com/user-attachments/assets/b8a5d489-a90a-49c4-bc86-3c9f3ac4f140" />
 
 ---
@@ -47,6 +43,7 @@ Supports **Android & iOS** with a clean, production-ready architecture.
 To run the project locally, a Firebase project is required.
 
 Steps:
+
 - Create a Firebase project
 - Enable Email/Password Authentication
 - Enable Realtime Database
@@ -69,6 +66,7 @@ Steps:
 A release APK has been generated for testing purposes.
 
 Testers can install the app by:
+
 - Scanning the provided QR code
 - Downloading the APK file
 - Allowing installation from unknown sources when prompted
@@ -83,6 +81,7 @@ No Play Store account is required for testing.
 All Firebase errors are mapped to clear, user-friendly messages.
 
 Examples:
+
 - Invalid credentials → Invalid email or password
 - Email already registered → This email is already registered
 - Network issues → Please check your internet connection
@@ -99,11 +98,13 @@ Firebase error codes are never shown to end users.
 - Logged-in user is excluded from dashboard list
 - Pull-to-refresh reloads user list
 - Empty, loading, and error states are handled correctly
- 
+
 ---
+
 ## Code Coverage wiht Jest Unit testing
+
 <img width="1881" height="1162" alt="Screenshot 2026-01-21 at 12 26 40" src="https://github.com/user-attachments/assets/0a5ffdb4-52e2-4bf0-851a-e5f109ea76ec" />
-  
+
 ---
 
 ## 🧹 Customizations
